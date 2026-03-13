@@ -78,8 +78,8 @@ Core rules:
 3. Prefer Graphite (`gt`) over raw Git for branch, commit, submit, and merge
    flows.
 4. Keep changes tightly scoped to the ticket.
-5. Provide a detailed test plan and validation evidence in a single final
-   workpad update before handoff, or earlier only if blocked.
+5. Keep the final Linear update high-signal. Post a single final workpad update
+   before handoff, or earlier only if blocked.
 6. Work only in the provided workspace copy of `aident.ai`.
 
 ## Related skills
@@ -118,8 +118,8 @@ Core rules:
    `## Codex Workpad`.
 2. Do not post routine progress updates to Linear. Update the workpad only once
    at final handoff to `Human Review`, or earlier only if blocked.
-3. Capture the environment stamp, baseline behavior, and `pull` result locally
-   so you can include them in the final handoff.
+3. Keep local notes as needed, but only include high-signal details in the
+   final Linear update.
 4. If the current branch is `main` or HEAD is detached, create a dedicated
    working branch before any edits:
    - Prefer the Linear `branch_name` when it is present and sane.
@@ -137,8 +137,9 @@ Core rules:
    - fail-fast behavior,
    - minimal comments,
    - detailed test plan expectations.
-3. Run the relevant validation for the scope and keep exact commands plus
-   results ready for the final handoff.
+3. Run the relevant validation for the scope and keep only the key E2E
+   verification plan for the final handoff unless the ticket explicitly
+   requires more detail.
 4. If the ticket or comments contain a required `Validation`, `Test Plan`, or
    `Testing` section, complete every item and include the results in the final
    handoff.
@@ -146,15 +147,13 @@ Core rules:
 6. Use the `commit` skill to create logical commits when the change is ready.
 7. Use the `push` skill to submit or update the draft PR.
 8. Attach the GitHub PR URL to the Linear issue using the `linear` skill.
-9. When work is complete, update the workpad once with:
-   - what changed,
-   - acceptance criteria status,
-   - environment stamp,
-   - baseline or reproduction evidence,
-   - validation commands and results,
-   - blockers and assumptions,
-   - branch or HEAD details,
-   - PR links.
+9. When work is complete, update the workpad once with a brief high-signal
+   handoff:
+   - if blocked: briefly describe the blocker, why it blocks completion, and
+     the exact action needed to unblock;
+   - otherwise: briefly describe the issue, the implemented solution, and the
+     E2E verification plan;
+   - include PR links when available.
 10. Only then move the issue to `Human Review`.
 
 ## Step 3: Human review handling
@@ -181,8 +180,8 @@ options.
 
 - Valid blockers include missing `codex` auth, missing Linear auth, missing
   Graphite auth, missing GitHub auth, or missing secrets required by the task.
-- If blocked, update the workpad with:
-  - what is missing,
+- If blocked, update the workpad briefly with:
+  - the blocker,
   - why it blocks completion,
   - the exact action needed to unblock.
 - Then move the issue to `Human Review`.
