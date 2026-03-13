@@ -1,7 +1,7 @@
 ---
 tracker:
   kind: linear
-  project_slug: "replace-with-aident-linear-project-slug"
+  project_slug: "aident-ai-f623b0845dc6"
   active_states:
     - Todo
     - In Progress
