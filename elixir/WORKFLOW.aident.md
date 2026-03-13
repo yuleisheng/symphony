@@ -87,7 +87,7 @@ Core rules:
 - `linear`: use Symphony's `linear_graphql` tool for raw Linear GraphQL work.
 - `pull`: sync the current branch or stack with latest `origin/main`.
 - `commit`: create Graphite-managed commits that match Aident's commit rules.
-- `push`: submit or update draft Graphite PRs.
+- `push`: submit or update PRs for review.
 - `land`: merge an approved PR with Graphite when the ticket reaches `Merging`.
 
 ## Status map
@@ -95,7 +95,8 @@ Core rules:
 - `Backlog` -> out of scope for this workflow; do not modify.
 - `Todo` -> immediately move to `In Progress`, then start execution.
 - `In Progress` -> active implementation.
-- `Human Review` -> work is ready and waiting on human review.
+- `Need Attention` -> blocked, waiting on human input, approval, auth, or secrets.
+- `PR in Review` -> PR is open and waiting on human review or CI.
 - `Rework` -> review feedback requires another implementation pass.
 - `Merging` -> approved and ready to land through the `land` skill.
 - `Done` -> terminal; no work required.
@@ -107,7 +108,8 @@ Core rules:
    - `Backlog` -> do nothing.
    - `Todo` -> move to `In Progress`, then begin execution.
    - `In Progress` -> continue execution from the existing workpad.
-   - `Human Review` -> wait for new review feedback or approval.
+   - `Need Attention` -> wait for human unblock or approval.
+   - `PR in Review` -> wait for review feedback, approval, or CI.
    - `Rework` -> begin a fresh execution pass focused on review feedback.
    - `Merging` -> open and follow `.codex/skills/land/SKILL.md`.
    - `Done` -> do nothing.
@@ -117,7 +119,7 @@ Core rules:
 1. Find or create a single persistent workpad comment headed
    `## Codex Workpad`.
 2. Do not post routine progress updates to Linear. Update the workpad only once
-   at final handoff to `Human Review`, or earlier only if blocked.
+   at final handoff to `PR in Review`, or earlier only if blocked.
 3. Keep local notes as needed, but only include high-signal details in the
    final Linear update.
 4. If the current branch is `main` or HEAD is detached, create a dedicated
@@ -155,14 +157,18 @@ Core rules:
    - otherwise: briefly describe the issue, the implemented solution, and the
      E2E verification plan;
    - include PR links when available.
-10. Only then move the issue to `Human Review`.
+10. Only then move the issue to `PR in Review`.
 
-## Step 3: Human review handling
+## Step 3: Need Attention And PR Review Handling
 
-1. In `Human Review`, do not start new feature work.
-2. Poll for PR feedback, CI status, and approval updates.
+1. In `Need Attention`, do not start or resume coding until a human unblocks the
+   issue or provides the required approval.
+2. In `PR in Review`, do not start new feature work. Wait for review feedback,
+   approval, or CI updates.
 3. If feedback requires code changes, move the issue to `Rework`.
-4. If a human moves the issue to `Merging`, open and follow
+4. If a human resolves a blocker and wants the agent to continue coding, move
+   the issue to `Rework` or `In Progress` as appropriate.
+5. If a human moves the issue to `Merging`, open and follow
    `.codex/skills/land/SKILL.md`.
 
 ## Step 4: Rework handling
@@ -171,7 +177,7 @@ Core rules:
 2. Do not post routine progress updates during rework. Update the workpad again
    only at the end of the rework pass, or earlier only if blocked.
 3. Continue the normal execution flow: implement, validate, `commit`, `push`,
-   and return the issue to `Human Review` only after all requested feedback is
+   and return the issue to `PR in Review` only after all requested feedback is
    addressed.
 
 ## Blocked-access escape hatch
@@ -185,4 +191,4 @@ options.
   - the blocker,
   - why it blocks completion,
   - the exact action needed to unblock.
-- Then move the issue to `Human Review`.
+- Then move the issue to `Need Attention`.
