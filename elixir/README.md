@@ -65,6 +65,48 @@ mise exec -- mix build
 mise exec -- ./bin/symphony ./WORKFLOW.md
 ```
 
+## Aident workflow example
+
+This fork includes [`WORKFLOW.aident.md`](./WORKFLOW.aident.md), tuned for
+`Aident-AI/aident.ai`.
+
+Before running it:
+
+1. Edit `tracker.project_slug` in `WORKFLOW.aident.md` to your real Linear
+   project slug.
+2. Export the path to this Symphony fork so the workspace bootstrap hook can
+   copy the Aident-specific Codex skills:
+
+   ```bash
+   export SYMPHONY_FORK_ROOT=/path/to/your/symphony-fork
+   ```
+
+3. Make sure these tools and auth flows already work on the machine running
+   Symphony:
+   - `codex app-server` auth (`OPENAI_API_KEY` or `codex login`)
+   - `pnpm`
+   - `gt` plus `gt auth`
+   - `gh auth login`
+   - `LINEAR_API_KEY`
+
+Run the Aident workflow with:
+
+```bash
+cd elixir
+mise exec -- ./bin/symphony ./WORKFLOW.aident.md
+```
+
+Notes:
+
+- The bootstrap hook clones `https://github.com/Aident-AI/aident.ai` into each
+  issue workspace.
+- It installs repo-local `commit`, `push`, `pull`, `land`, and `linear` skills
+  into `.codex/skills`.
+- It writes bootstrap output to `.symphony-bootstrap.log` inside the workspace
+  so the agent can see setup warnings before starting work.
+- Set `AIDENT_SOURCE_REPO_URL` if you want the workflow to clone a different
+  Aident remote, such as a fork.
+
 ## Configuration
 
 Pass a custom workflow file path to `./bin/symphony` when starting the service:
