@@ -66,7 +66,7 @@ No description provided.
 Bootstrap context:
 
 - Read `.symphony-bootstrap.log` before making changes.
-- Follow `AGENTS.md` and `CLAUDE.md` in the repo root.
+- Follow `AGENTS.md` in the repo root.
 - Workspace bootstrap copied repo-local `commit`, `push`, `pull`, `land`, and
   `linear` skills into `.codex/skills/`.
 
@@ -78,8 +78,8 @@ Core rules:
 3. Prefer Graphite (`gt`) over raw Git for branch, commit, submit, and merge
    flows.
 4. Keep changes tightly scoped to the ticket.
-5. Provide a detailed test plan and validation evidence in the workpad before
-   handoff.
+5. Provide a detailed test plan and validation evidence in a single final
+   workpad update before handoff, or earlier only if blocked.
 6. Work only in the provided workspace copy of `aident.ai`.
 
 ## Related skills
@@ -116,46 +116,46 @@ Core rules:
 
 1. Find or create a single persistent workpad comment headed
    `## Codex Workpad`.
-2. Update the workpad before new code changes:
-   - current plan,
-   - acceptance criteria,
-   - validation checklist,
-   - blockers and assumptions.
-3. Add a compact environment stamp in the workpad using the format
-   `<host>:<abs-workdir>@<short-sha>`.
-4. Reproduce the issue or capture the current baseline behavior before editing
-   code. Record the reproduction evidence in the workpad.
-5. Run the `pull` skill before editing code and record the resulting `HEAD` SHA
-   in the workpad.
-6. If the current branch is `main` or HEAD is detached, create a dedicated
+2. Do not post routine progress updates to Linear. Update the workpad only once
+   at final handoff to `Human Review`, or earlier only if blocked.
+3. Capture the environment stamp, baseline behavior, and `pull` result locally
+   so you can include them in the final handoff.
+4. If the current branch is `main` or HEAD is detached, create a dedicated
    working branch before any edits:
    - Prefer the Linear `branch_name` when it is present and sane.
    - Otherwise derive a concise branch name from `{{ issue.identifier }}` and
      the ticket title.
    - Use `gt branch create <branch-name>`.
-7. If `.symphony-bootstrap.log` contains setup failures, account for them in
+5. If `.symphony-bootstrap.log` contains setup failures, account for them in
    the plan before implementation.
 
 ## Step 2: Execute the work
 
-1. Follow the workpad plan and keep it current after each meaningful milestone.
-2. Implement the smallest change that satisfies the ticket.
-3. Follow repo instructions from `AGENTS.md` and `CLAUDE.md`, including:
+1. Implement the smallest change that satisfies the ticket.
+2. Follow repo instructions from `AGENTS.md`, including:
    - strong typing,
    - fail-fast behavior,
    - minimal comments,
    - detailed test plan expectations.
-4. Run the relevant validation for the scope and record exact commands plus
-   results in the workpad.
-5. If the ticket or comments contain a required `Validation`, `Test Plan`, or
-   `Testing` section, copy it into the workpad and complete every item.
-6. Before any publish step, confirm the local validation is green.
-7. Use the `commit` skill to create logical commits when the change is ready.
-8. Use the `push` skill to submit or update the draft PR.
-9. Attach the GitHub PR URL to the Linear issue using the `linear` skill.
-10. When work is complete, refresh the workpad so plan, acceptance criteria,
-    and validation all match reality.
-11. Only then move the issue to `Human Review`.
+3. Run the relevant validation for the scope and keep exact commands plus
+   results ready for the final handoff.
+4. If the ticket or comments contain a required `Validation`, `Test Plan`, or
+   `Testing` section, complete every item and include the results in the final
+   handoff.
+5. Before any publish step, confirm the local validation is green.
+6. Use the `commit` skill to create logical commits when the change is ready.
+7. Use the `push` skill to submit or update the draft PR.
+8. Attach the GitHub PR URL to the Linear issue using the `linear` skill.
+9. When work is complete, update the workpad once with:
+   - what changed,
+   - acceptance criteria status,
+   - environment stamp,
+   - baseline or reproduction evidence,
+   - validation commands and results,
+   - blockers and assumptions,
+   - branch or HEAD details,
+   - PR links.
+10. Only then move the issue to `Human Review`.
 
 ## Step 3: Human review handling
 
@@ -168,7 +168,8 @@ Core rules:
 ## Step 4: Rework handling
 
 1. Re-read the full issue, the workpad, and all review comments.
-2. Update the workpad with a fresh plan focused on the requested changes.
+2. Do not post routine progress updates during rework. Update the workpad again
+   only at the end of the rework pass, or earlier only if blocked.
 3. Continue the normal execution flow: implement, validate, `commit`, `push`,
    and return the issue to `Human Review` only after all requested feedback is
    addressed.
