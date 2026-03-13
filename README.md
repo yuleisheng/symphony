@@ -42,7 +42,26 @@ This fork includes a reusable Codex skill at
 [`/.codex/skills/install-symphony/SKILL.md`](.codex/skills/install-symphony/SKILL.md)
 for installing or updating Symphony on a machine.
 
-Use it when you want Codex to:
+If Codex is already running in this repo, no separate install step is needed.
+Ask:
+
+> Use `install-symphony` to set up Symphony on this machine.
+
+To install the skill globally into Codex for reuse across repos, use Codex's
+built-in `skill-installer` and ask:
+
+> Install the skill from `yuleisheng/symphony` at path
+> `.codex/skills/install-symphony`
+
+Then restart Codex to pick up the new skill.
+
+After installing it globally, use it by asking:
+
+> Use `install-symphony` to set up Symphony on this machine using
+> `https://github.com/yuleisheng/symphony` and workflow
+> `elixir/WORKFLOW.aident.md`
+
+What the skill automates:
 
 - clone or update the Symphony repo
 - install `mise` and the pinned Elixir/Erlang toolchain
