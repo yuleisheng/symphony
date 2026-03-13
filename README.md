@@ -36,6 +36,23 @@ to help with the setup:
 > Set up Symphony for my repository based on
 > https://github.com/openai/symphony/blob/main/elixir/README.md
 
+### Codex Install Skill
+
+This fork includes a reusable Codex skill at
+[`/.codex/skills/install-symphony/SKILL.md`](.codex/skills/install-symphony/SKILL.md)
+for installing or updating Symphony on a machine.
+
+Use it when you want Codex to:
+
+- clone or update the Symphony repo
+- install `mise` and the pinned Elixir/Erlang toolchain
+- run `mix setup` and `mix build`
+- verify `gh`, `codex`, Graphite, and tracker auth
+- start Symphony with the selected workflow file
+
+For the Aident setup in this fork, the skill points at
+[`elixir/WORKFLOW.aident.md`](elixir/WORKFLOW.aident.md).
+
 ---
 
 ## License
