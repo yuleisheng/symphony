@@ -145,7 +145,8 @@ Core rules:
    handoff.
 5. Before any publish step, confirm the local validation is green.
 6. Use the `commit` skill to create logical commits when the change is ready.
-7. Use the `push` skill to submit or update the draft PR.
+7. Use the `push` skill to submit or update the PR, ensure it has a concise
+   description, and publish it for review.
 8. Attach the GitHub PR URL to the Linear issue using the `linear` skill.
 9. When work is complete, update the workpad once with a brief high-signal
    handoff:
