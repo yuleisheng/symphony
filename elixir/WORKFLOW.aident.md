@@ -5,7 +5,6 @@ tracker:
   active_states:
     - Todo
     - In Progress
-    - Human Review
     - Rework
     - Merging
   terminal_states:
